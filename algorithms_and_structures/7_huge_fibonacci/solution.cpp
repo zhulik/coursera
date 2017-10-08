@@ -14,7 +14,9 @@ template<typename T> T pisano_period_length(T m) {
 
 template<typename T> T get_fibonacci_huge_fast(T n, T m) {
     auto pisano_length =  pisano_period_length(m);
-    n = n % 60;
+
+    n = n % pisano_length;
+
     if (n <= 1)
         return n;
 
@@ -24,7 +26,7 @@ template<typename T> T get_fibonacci_huge_fast(T n, T m) {
     for (T i = 0; i < n - 1; ++i) {
         T tmp_previous = previous;
         previous = current;
-        current = (tmp_previous + current + 1)  % m;
+        current = (tmp_previous + current)  % m;
     }
 
     return current % m;
