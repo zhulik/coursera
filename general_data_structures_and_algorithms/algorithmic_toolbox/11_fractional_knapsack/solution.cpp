@@ -10,7 +10,7 @@ public:
     m_price = ((float) m_value) / m_weight;
   };
 
-  bool operator<(Item other) {
+  bool operator<(const Item &other) const {
     return m_price > other.m_price;
   }
 
