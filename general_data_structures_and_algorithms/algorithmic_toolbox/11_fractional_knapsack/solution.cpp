@@ -7,7 +7,7 @@ using namespace std;
 class Item {
 public:
   Item(int weight, int value) : m_weight(weight), m_value(value) {
-    m_price = ((float) m_value) / m_weight;
+    m_price = ((double) m_value) / m_weight;
   };
 
   bool operator<(const Item &other) const {
@@ -37,14 +37,14 @@ private:
 };
 
 double get_optimal_value(int capacity, vector<Item> items) {
-  double value = 0.0;
+  double value = 0;
 
   for(int i = 0; i < items.size(); i++) {
       if ( capacity == 0 ) {
         return value;
       }
-      double a = min(items[i].weight(), capacity);
-      value += a*items[i].price();
+      int a = min(items[i].weight(), capacity);
+      value += a * items[i].price();
       items[i].setWeight(items[i].weight() - a);
       capacity -= a;
   }
@@ -67,7 +67,7 @@ int main() {
 
   double optimal_value = get_optimal_value(capacity, items);
 
-  cout.precision(7);
+  cout.precision(10);
   cout << optimal_value << endl;
   return 0;
 }
