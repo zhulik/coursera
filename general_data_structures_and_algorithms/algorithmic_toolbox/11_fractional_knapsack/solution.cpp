@@ -18,6 +18,10 @@ public:
     return m_weight;
   }
 
+  int setWeight(int w) {
+    m_weight = w;
+  }
+
   int value() const {
     return m_value;
   }
@@ -32,20 +36,17 @@ private:
   double m_price = 0;
 };
 
-double get_optimal_value(int capacity, const vector<Item> &items) {
+double get_optimal_value(int capacity, vector<Item> items) {
   double value = 0.0;
 
-  while(capacity > items.front().weight()) {
-    for(auto item: items) {
-      if (capacity >= item.weight()) {
-        capacity -= item.weight();
-        value += item.value();
+  for(int i = 0; i < items.size(); i++) {
+      if ( capacity == 0 ) {
+        return value;
       }
-    }
-  }
-
-  if (capacity > 0) {
-    value += items.front().price() * capacity;
+      double a = min(items[i].weight(), capacity);
+      value += a*items[i].price();
+      items[i].setWeight(items[i].weight() - a);
+      capacity -= a;
   }
 
   return value;
@@ -66,7 +67,7 @@ int main() {
 
   double optimal_value = get_optimal_value(capacity, items);
 
-  cout.precision(10);
+  cout.precision(7);
   cout << optimal_value << endl;
   return 0;
 }
