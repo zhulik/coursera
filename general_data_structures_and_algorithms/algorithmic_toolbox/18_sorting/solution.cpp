@@ -30,8 +30,6 @@ std::pair<int, int> partition3(vector<int> &a, const int l, const int r) {
       swap(a[i], a[x]);
     }
   }
-  print_vector(a);
-  cout << l <<" " << j << " " << r << endl;
   return pair<int, int>(j, j);
 }
 
