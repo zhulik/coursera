@@ -4,15 +4,11 @@
 
 using namespace std;
 
-int binary_search(const vector<int> &a, int x, int begin = 0, int end = -1) {
-  if (end == -1)
-    end = a.size() - 1;
-
-  if (begin >= end)
+int binary_search(const vector<int> &a, int x, int begin, int end) {
+  if (begin > end)
     return -1;
 
   int mid = (begin + end) / 2;
-  // cout << begin << " " << end<< " " << mid << endl;
   if (a[mid] == x)
     return mid;
 
@@ -43,7 +39,7 @@ int main() {
   for (int i = 0; i < m; ++i) {
     cin >> b[i];
   }
-  for (int i = 0; i < m; ++i) {
-    cout << binary_search(a, b[i]) << ' ';
+  for (auto x: b) {
+    cout << binary_search(a, x, 0, a.size() -1) << ' ';
   }
 }
