@@ -24,13 +24,13 @@ std::pair<int, int> partition3(vector<int> &a, const int l, const int r) {
   swap(a[l], a[j]);
 
   x = j;
-  for (int i = l; i < j; i++) {
+  for (int i = l; i < x; i++) {
     if (a[i] == a[j]) {
       x--;
-      swap(a[i], a[x]);
+      swap(a[x], a[i]);
     }
   }
-  return pair<int, int>(j, j);
+  return pair<int, int>(x, j);
 }
 
 void randomized_quick_sort(vector<int> &a, int l, int r) {

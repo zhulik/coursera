@@ -4,14 +4,13 @@
 
 using namespace std;
 
-typedef vector<int> Array;
+template<typename T>
+T merge(vector<T> &arr, vector<T> &temp, size_t left, size_t mid, size_t right) {
+  T inv_count = 0;
 
-int merge(Array &arr, Array &temp, int left, int mid, int right) {
-  int inv_count = 0;
-
-  int i = left;
-  int j = mid;
-  int k = left;
+  T i = left;
+  T j = mid;
+  T k = left;
 
   while ((i <= mid - 1) && (j <= right)) {
   	if (arr[i] <= arr[j])	{
@@ -35,8 +34,9 @@ int merge(Array &arr, Array &temp, int left, int mid, int right) {
   return inv_count;
 }
 
-int mergeSort(Array &arr, Array &temp, int left, int right) {
-  int mid, inv_count = 0;
+template<typename T>
+T mergeSort(vector<T> &arr, vector<T> &temp, size_t left, size_t right) {
+  T mid, inv_count = 0;
   if (right > left) {
   	mid = (right + left) / 2;
 
@@ -48,16 +48,17 @@ int mergeSort(Array &arr, Array &temp, int left, int right) {
   return inv_count;
 }
 
-int mergeSort(Array &arr) {
-	Array temp(arr.size());
+template<typename T>
+T mergeSort(vector<T> &arr) {
+	vector<T> temp(arr.size());
 	return mergeSort(arr, temp, 0, arr.size() - 1);
 }
 
 void stressTest() {
-  Array arr2 = {9, 9, 3, 3, 3, 3, 3, 3, 1, 1 };
+  vector<long long> arr2 = {9, 9, 3, 3, 3, 3, 3, 3, 1, 1 };
   assert(mergeSort(arr2) == 28);
 
-  Array arr3 = {2, 3, 9, 2, 9 };
+  vector<long long> arr3 = {2, 3, 9, 2, 9 };
   assert(mergeSort(arr3) == 2);
 }
 
@@ -65,7 +66,7 @@ void stressTest() {
 int main() {
   int n;
   cin >> n;
-  Array a(n);
+  vector<long long> a(n);
   for (size_t i = 0; i < a.size(); i++) {
     cin >> a[i];
   }
