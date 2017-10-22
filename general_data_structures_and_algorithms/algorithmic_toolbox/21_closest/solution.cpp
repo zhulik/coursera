@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <algorithm>
 #include <cmath>
 
 using namespace std;
@@ -22,11 +23,34 @@ public:
     return !((*this) == other);
   }
 
+  bool operator<(const Point<T> &other) const {
+    return m_x < other.m_x;
+  }
+
+  T x() const { return m_x; }
+  T y() const { return m_y; }
+
 private:
   T m_x = 0;
   T m_y = 0;
   size_t m_id = -1;
 };
+
+template<typename T>
+double median(vector<Point<T>> points)
+{
+  double median;
+  size_t size = points.size();
+
+  if (size  % 2 == 0) {
+      median = (double)(points[size / 2 - 1].x() + points[size / 2].x()) / 2;
+  }
+  else {
+      median = points[size / 2].x();
+  }
+
+  return median;
+}
 
 double minimal_distance(const vector<Point<long long>> &points) {
   double min = points[0].distance(points[1]);
@@ -54,6 +78,8 @@ int main() {
   for (size_t i = 0; i < n; i++) {
     points[i] = Point<long long>(x[i], y[i], i);
   }
+  std::sort(points.begin(), points.end());
+  cout << median(points) << endl;
   cout << fixed;
   cout << setprecision(9) << minimal_distance(points) << endl;
 }
