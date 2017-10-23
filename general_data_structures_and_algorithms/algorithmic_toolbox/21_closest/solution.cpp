@@ -36,14 +36,14 @@ private:
   size_t m_id = -1;
 };
 
-template<typename T>
-double median(vector<Point<T>> points)
+template<typename T, typename M>
+double median(vector<Point<T>> points, M m)
 {
   double median;
   size_t size = points.size();
 
   if (size  % 2 == 0) {
-      median = (double)(points[size / 2 - 1].x() + points[size / 2].x()) / 2;
+      median = (double)((points[size / 2 - 1].*m)() + (points[size / 2].*m)()) / 2;
   }
   else {
       median = points[size / 2].x();
@@ -79,7 +79,7 @@ int main() {
     points[i] = Point<long long>(x[i], y[i], i);
   }
   std::sort(points.begin(), points.end());
-  cout << median(points) << endl;
+  cout << median(points, &Point<long long>::x) << endl;
   cout << fixed;
   cout << setprecision(9) << minimal_distance(points) << endl;
 }
