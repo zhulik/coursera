@@ -61,7 +61,7 @@ vector<T> optimal_sequence(T n) {
     i = steps[i];
   }
 
-  if (sequence.size() > 1)
+  if (sequence.size() > 1 || sequence[0] != 1)
     sequence.push_back(1);
 
   reverse(sequence.begin(), sequence.end());
