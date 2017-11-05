@@ -16,7 +16,7 @@ template<typename T> void print(const std::vector<std::vector<T>> &tries) {
 template<typename T>
 T optimal_weight(T W, const vector<T> &items) {
   T n = items.size();
-  std::vector<std::vector<T>>tries(W + 1, std::vector<int>(n + 1, 0));
+  std::vector<std::vector<T>>tries(W + 1, std::vector<T>(n + 1, 0));
 
 
   for(T i = 1; i <= n; i++ ) {
