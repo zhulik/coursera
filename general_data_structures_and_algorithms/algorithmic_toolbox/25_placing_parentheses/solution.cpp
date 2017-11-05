@@ -67,8 +67,8 @@ template<typename T> void print(const DVector<T> &tries) {
 
 template<typename T>
 pair<T, T> min_and_max(const Expression<T> &e, const DVector<T> &m, const DVector<T> &M, int i, int j) {
-  T mn = numeric_limits<T>::infinity();
-  T mx = -numeric_limits<T>::infinity();
+  T mn = numeric_limits<T>::max();
+  T mx = -numeric_limits<T>::max();
   for (int k = i; k < j; k++) {
       T a = eval(M[i][k], M[k+1][j], e.operators()[k]);
       T b = eval(M[i][k], m[k+1][j], e.operators()[k]);
@@ -99,7 +99,6 @@ T get_maximum_value(const Expression<T> &e) {
       maxs[i][j] = p.second;
     }
   }
-
   return maxs[0][n-1];
 }
 
